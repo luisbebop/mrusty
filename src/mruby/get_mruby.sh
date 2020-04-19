@@ -14,7 +14,7 @@
 # * compile, linker & archiver
 # * unzip
 
-VERSION=1.2.0
+VERSION=1.4.1
 CURRENT=$PWD
 
 # Checks is /tmp/mruby needs cleaning or creation.
@@ -25,6 +25,7 @@ else
   mkdir /tmp/mruby
 fi
 
+cp default.gembox /tmp/mruby
 cd /tmp/mruby
 
 wget https://github.com/mruby/mruby/archive/$VERSION.zip
@@ -33,6 +34,7 @@ unzip -u $VERSION.zip
 mkdir -p mruby-out/src/mrblib
 mkdir -p mruby-out/src/mrbgems
 
+mv -f default.gembox mruby-$VERSION/mrbgems/ 
 cd mruby-$VERSION
 
 # minirake compiles the compiler and rb files to C.
@@ -63,6 +65,18 @@ rm -rf build/host/mrbgems/mruby-bin*
 
 rm -rf mrbgems/mruby-test
 rm -rf build/host/mrbgems/mruby-test
+
+rm -rf mrbgems/mruby-socket
+rm -rf build/host/mrbgems/mruby-socket
+
+rm -rf mrbgems/mruby-time
+rm -rf build/host/mrbgems/mruby-time
+
+rm -rf mrbgems/mruby-io
+rm -rf build/host/mrbgems/mruby-io
+
+rm -rf mrbgems/mruby-pack
+rm -rf build/host/mrbgems/mruby-pack
 
 # Copies all gems.
 
